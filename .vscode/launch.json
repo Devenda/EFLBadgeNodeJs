@@ -6,6 +6,15 @@
     "configurations": [
         {
             "type": "node",
+            "request": "attach",
+            "name": "Attach to Remote",
+            "address": "192.168.0.222",
+            "port": 9229,
+            "localRoot": "${workspaceFolder}/bin",
+            "remoteRoot": "/home/pi/BADGER/bin",
+        },
+        {
+            "type": "node",
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}\\src\\app.ts",
