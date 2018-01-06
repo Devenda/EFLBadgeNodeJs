@@ -1,0 +1,27 @@
+{
+  "name": "EFLBadgeNodeJs",
+  "version": "1.0.0",
+  "description": "New badge software for opening door and logging to DB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TinusScheppers/EFLBadgeNodeJs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TinusScheppers/EFLBadgeNodeJs/issues"
+  },
+  "homepage": "https://github.com/TinusScheppers/EFLBadgeNodeJs#readme",
+  "devDependencies": {
+    "@types/node": "^8.5.6",
+    "@types/winston": "^2.3.7"
+  },
+  "dependencies": {
+    "winston": "^2.4.0"
+  }
+}
