@@ -22,6 +22,7 @@
     "@types/winston": "^2.3.7"
   },
   "dependencies": {
+    "input-event": "^1.2.2",
     "winston": "^2.4.0"
   }
 }

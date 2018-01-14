@@ -1,4 +1,5 @@
 import { Logger, transports } from 'winston';
+import * as reader from './cardReader';
 
 var logger = new Logger({
     level: "info",
@@ -8,5 +9,7 @@ var logger = new Logger({
     ]
 });
 
-logger.warn("Warning logged")
-console.log("test")
+let cr = new reader.CardReader();
+
+//logger.warn("Warning logged")
+
