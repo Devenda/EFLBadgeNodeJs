@@ -1,15 +1,12 @@
-import { Logger, transports } from 'winston';
 import * as reader from './cardReader';
+import * as winston from 'winston';
 
-var logger = new Logger({
-    level: "info",
-    transports: [
-        new transports.Console(),
-        new transports.File({ filename: 'badger.log' })
-    ]
-});
+
+var logger = require('winston'); //needed to get default logger 
+logger.add(winston.transports.File, { filename: 'badger.log', level: "info" });
+logger.info('Logger initialized');
+module.exports = logger;
 
 let cr = new reader.CardReader();
 
-//logger.warn("Warning logged")
-
+logger.info("Start application");
