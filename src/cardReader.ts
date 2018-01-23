@@ -14,10 +14,10 @@ export class CardReader {
             let input = new InputEvent("/dev/input/event0");
 
             this.cardReaderDevice = new InputEvent.Keyboard(input);
-            this.cardReaderDevice.on('keypress', this.processInput);
+            this.cardReaderDevice.on('keypress', this.ProcessInput);
 
             //to catch cardReader errors because input-event does not catch them in current version
-            process.on('uncaughtException', this.logEventError);
+            process.on('uncaughtException', this.LogEventError);
 
             logger.info("card reader initialized succesfully")
         } catch (error) {
@@ -25,12 +25,12 @@ export class CardReader {
         }
     }
 
-    private logEventError = (error) => {
+    private LogEventError = (error) => {
         logger.error("Uncaught exception!: ", error);
         throw (error);
     }
 
-    private processInput = (event) => { // need this in event handler: https://stackoverflow.com/questions/40822109/typescript-how-to-keep-class-methods-event-handlers-context-to-this-instance
+    private ProcessInput = (event) => { // need this in event handler: https://stackoverflow.com/questions/40822109/typescript-how-to-keep-class-methods-event-handlers-context-to-this-instance
         let code: string = event.code;
         console.log('code:' + code);
 
@@ -44,5 +44,9 @@ export class CardReader {
         else {
             console.log('unknown keycode');
         }
+    }
+
+    private CheckMember(id:string) {
+        
     }
 }

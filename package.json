@@ -18,11 +18,15 @@
   },
   "homepage": "https://github.com/TinusScheppers/EFLBadgeNodeJs#readme",
   "devDependencies": {
+    "@types/dotenv": "^4.0.2",
+    "@types/mysql": "^2.15.2",
     "@types/node": "^8.5.6",
     "@types/winston": "^2.3.7"
   },
   "dependencies": {
+    "dotenv": "^4.0.0",
     "input-event": "^1.2.2",
+    "mysql": "^2.15.0",
     "winston": "^2.4.0"
   }
 }
