@@ -11,6 +11,6 @@ logger.info('Logger initialized');
 
 //DB
 let db = new memberDB.MemberDB();
-db.searchMembers();
+db.searchMembers().then(rows => console.log(rows)); // async instead of then? https://stackoverflow.com/questions/46515764/how-can-i-use-async-await-at-the-top-level
 
 logger.info("end");

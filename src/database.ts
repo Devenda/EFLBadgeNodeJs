@@ -5,7 +5,7 @@ var logger = require('winston');
 env.config(); //import env file env
 
 export class MemberDB {
-    private conn: mysql.Connection;
+    private conn: mysql.Connection; 
 
     constructor() {
         this.conn = mysql.createConnection({
@@ -23,13 +23,14 @@ export class MemberDB {
 
     public async searchMembers() {
         try {
-            var me = this
-            await new Promise(function (resolve, reject) {
-                me.conn.query('SELECT * FROM ecofablab01.memberzzz', (err, rows) => {
+            var me = this //important as otherwise the this context is lost: https://stackoverflow.com/questions/32547735/javascript-promises-how-to-access-variable-this-inside-a-then-scope
+            var rows = await new Promise(function (resolve, reject) { //convert to promise: https://stackoverflow.com/questions/22519784/how-do-i-convert-an-existing-callback-api-to-promises
+                me.conn.query('SELECT * FROM ecofablab01.member', (err, rows) => {
                     if (err) reject(err);
                     resolve(rows)
                 });
             });
+            return rows
         } catch (error) {
             console.log(error)
         }
