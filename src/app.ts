@@ -11,7 +11,6 @@ logger.info('Logger initialized');
 
 //DB
 let db = new memberDB.MemberDB();
-db.Connect();
-db.Disconnect();
+db.searchMembers();
 
 logger.info("end");

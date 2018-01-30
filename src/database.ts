@@ -21,8 +21,18 @@ export class MemberDB {
         throw (error);
     }
 
-    public Connect() {
-        this.conn.connect();
+    public async searchMembers() {
+        try {
+            var me = this
+            await new Promise(function (resolve, reject) {
+                me.conn.query('SELECT * FROM ecofablab01.memberzzz', (err, rows) => {
+                    if (err) reject(err);
+                    resolve(rows)
+                });
+            });
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     public Disconnect() {
