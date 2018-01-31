@@ -23,9 +23,9 @@ export class MemberDB {
 
     public async searchMembers() {
         try {
-            var me = this //important as otherwise the this context is lost: https://stackoverflow.com/questions/32547735/javascript-promises-how-to-access-variable-this-inside-a-then-scope
-            var rows = await new Promise(function (resolve, reject) { //convert to promise: https://stackoverflow.com/questions/22519784/how-do-i-convert-an-existing-callback-api-to-promises
-                me.conn.query('SELECT * FROM ecofablab01.member', (err, rows) => {
+            //Use arrow function to avoid loosing this ref 
+            var rows = await new Promise( (resolve, reject) => { //convert to promise: https://stackoverflow.com/questions/22519784/how-do-i-convert-an-existing-callback-api-to-promises
+                this.conn.query('SELECT * FROM ecofablab01.member', (err, rows) => {
                     if (err) reject(err);
                     resolve(rows)
                 });
