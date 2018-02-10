@@ -1,15 +1,17 @@
 import * as InputEvent from "input-event"
 import * as event from "events"
+import { EventEmitter } from "events";
 
 //needed to get default logger configured in app.ts, default logger is shared between each require
 var logger = require('winston');
 
-export class CardReader {
+export class CardReader extends event.EventEmitter{
     keyCodes = { '11': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6, '8': 7, '9': 8, '10': 9 };
-    memberId: number[] = [];
+    memberNrs: number[] = [];
     cardReaderDevice: InputEvent;
 
     constructor() {
+        super();
         try {
             let input = new InputEvent("/dev/input/event0");
 
@@ -25,28 +27,29 @@ export class CardReader {
         }
     }
 
+    private ProcessInput = (eventInput) => { // need this in event handler: https://stackoverflow.com/questions/40822109/typescript-how-to-keep-class-methods-event-handlers-context-to-this-instance
+        let code: string = eventInput.code;
+        //logger.info('code:' + code);
+
+        if (code in this.keyCodes) {
+            this.memberNrs.push(Number(this.keyCodes[code]));
+        }
+        else if (code == '28') {
+            let memberId = this.memberNrs.join("")
+
+            //trow event, caught in app
+            this.emit('memberBadged', memberId)
+
+            logger.info('Member ' + memberId + 'badged');
+            this.memberNrs = [];
+        }
+        else {
+            logger.warning('unknown keycode');
+        }
+    }
+
     private LogEventError = (error) => {
         logger.error("Uncaught exception!: ", error);
         throw (error);
-    }
-
-    private ProcessInput = (event) => { // need this in event handler: https://stackoverflow.com/questions/40822109/typescript-how-to-keep-class-methods-event-handlers-context-to-this-instance
-        let code: string = event.code;
-        console.log('code:' + code);
-
-        if (code in this.keyCodes) {
-            this.memberId.push(Number(this.keyCodes[code]));
-        }
-        else if (code == '28') {
-            console.log(this.memberId.join(""));
-            this.memberId = [];
-        }
-        else {
-            console.log('unknown keycode');
-        }
-    }
-
-    private CheckMember(id:string) {
-        
     }
 }
