@@ -7,10 +7,10 @@ var logger = require('winston'); //needed to get default logger
 logger.add(winston.transports.File, { filename: 'badger.log', level: "info" });
 logger.info('Logger initialized');
 
-//Card reader
+//Card reader, handle badge events
 let cr = new reader.CardReader();
 function memberBadged(id) {
-    logger.info('received id:' + id)
+    logger.info('received id: ' + id)
 }
 cr.on('memberBadged', memberBadged);
 

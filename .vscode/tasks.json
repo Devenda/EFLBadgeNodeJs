@@ -4,15 +4,31 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label":"build",
             "type": "typescript",
             "tsconfig": "tsconfig.json",
             "problemMatcher": [
                 "$tsc"
+            ]
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "dependsOn": [
+                "build"
             ],
+            "windows": {
+                "command": "./Deploy.cmd"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
         }
     ]
 }

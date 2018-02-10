@@ -37,10 +37,10 @@ export class CardReader extends event.EventEmitter{
         else if (code == '28') {
             let memberId = this.memberNrs.join("")
 
-            //trow event, caught in app
+            //raise event, handle in app
             this.emit('memberBadged', memberId)
 
-            logger.info('Member ' + memberId + 'badged');
+            logger.info('Member ' + memberId + ' badged');
             this.memberNrs = [];
         }
         else {
