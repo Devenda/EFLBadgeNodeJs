@@ -15,12 +15,6 @@ export class MemberDB {
             user: process.env.USER,
             password: process.env.PASS
         });
-        this.conn.on('error', this.logConnError); //needed because error is not thrown as promise??
-    }
-
-    private logConnError = (error) => {
-        logger.error("Connection error: ", error);
-        throw (error);
     }
 
     public async connectionIsActive() {

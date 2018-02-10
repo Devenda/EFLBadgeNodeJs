@@ -21,9 +21,9 @@ export class CardReader extends event.EventEmitter{
             //to catch cardReader errors because input-event does not catch them in current version
             process.on('uncaughtException', this.LogEventError);
 
-            logger.info("card reader initialized succesfully")
+            logger.info("Card reader initialized succesfully")
         } catch (error) {
-            logger.error("something went wrong initializing the card reader:", error)
+            logger.error("Something went wrong initializing the card reader:", error)
         }
     }
 
@@ -36,15 +36,16 @@ export class CardReader extends event.EventEmitter{
         }
         else if (code == '28') {
             let memberId = this.memberNrs.join("")
+            logger.info('Member ' + memberId + ' badged');
 
             //raise event, handle in app
             this.emit('memberBadged', memberId)
-
-            logger.info('Member ' + memberId + ' badged');
+            
+            //Clear buffer for next badge
             this.memberNrs = [];
         }
         else {
-            logger.warning('unknown keycode');
+            logger.warning('Unknown keycode');
         }
     }
 
