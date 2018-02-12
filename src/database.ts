@@ -18,18 +18,20 @@ export class MemberDB {
     }
 
     public async connectionIsActive() {
-        try {
-            var rows = await new Promise( (resolve, reject) => { //convert to promise: https://stackoverflow.com/questions/22519784/how-do-i-convert-an-existing-callback-api-to-promises
-                this.conn.connect((err, rows) => {
-                    if (err) reject(err);
-                    resolve(rows)
+        (async () => { // top level async: https://stackoverflow.com/questions/46515764/how-can-i-use-async-await-at-the-top-level
+            try {
+                var rows = await new Promise((resolve, reject) => { //convert to promise: https://stackoverflow.com/questions/22519784/how-do-i-convert-an-existing-callback-api-to-promises
+                    this.conn.connect((err, rows) => {
+                        if (err) reject(err);
+                        resolve(rows)
+                    });
                 });
-            });
-            return true
-        } catch (error) {
-            logger.error("Connection error: ", error);
-            return false
-        }
+                return true
+            } catch (error) {
+                logger.error("Connection error: ", error);
+                return false
+            }
+        });
     }
 
     public async searchMember(mId: string) {
